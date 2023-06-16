@@ -11,4 +11,8 @@ export const globalStyles = globalCss({
     fontFamily: 'Nunito',
     fontWeight: 400,
   },
+
+  button: {
+    cursor: 'pointer',
+  },
 })
