@@ -4,7 +4,7 @@ import Logo from '../../assets/logo.png'
 import { FcGoogle } from 'react-icons/fc'
 import { BsGithub, BsFillRocketTakeoffFill } from 'react-icons/bs'
 import {
-  LoginContainer,
+  LoginPageContainer,
   ImageContainer,
   LoginActionsContainer,
   LoginButton,
@@ -35,7 +35,7 @@ export default function Login() {
   }, [isUserSignedIn, router])
 
   return (
-    <LoginContainer>
+    <LoginPageContainer>
       <ImageContainer>
         <Image
           quality={100}
@@ -68,7 +68,7 @@ export default function Login() {
           </LoginButton>
         </LoginOptions>
       </LoginActionsContainer>
-    </LoginContainer>
+    </LoginPageContainer>
   )
 }
 

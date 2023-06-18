@@ -1,6 +1,6 @@
 import { styled } from '@/styles'
 
-export const LoginContainer = styled('div', {
+export const LoginPageContainer = styled('div', {
   width: '100%',
   padding: '$5',
   display: 'flex',

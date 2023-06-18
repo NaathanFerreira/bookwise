@@ -1,6 +1,6 @@
 import { styled } from '@/styles'
 
-export const HomeContainer = styled('main', {
+export const HomePageContainer = styled('main', {
   h1: {
     display: 'flex',
     gap: '$4',

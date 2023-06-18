@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Logo from '../../assets/logo.png'
-import { BsGraphUpArrow, BsBinoculars } from 'react-icons/bs'
+import { BsGraphUpArrow, BsBinoculars, BsPerson } from 'react-icons/bs'
 import { FiLogIn, FiLogOut } from 'react-icons/fi'
 import {
   LoginButton,
@@ -46,6 +46,11 @@ export default function SidebarNav() {
         <NavigationLink href="/explore" active={pathname === '/explore'}>
           <BsBinoculars /> Explore
         </NavigationLink>
+        {isUserSignedIn && (
+          <NavigationLink href="/profile" active={pathname === '/profile'}>
+            <BsPerson /> Profile
+          </NavigationLink>
+        )}
       </NavigationOptions>
       {isUserSignedIn ? (
         <LogoutButton onClick={handleLogout}>

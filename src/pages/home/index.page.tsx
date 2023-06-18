@@ -2,7 +2,7 @@ import DefaultLayout from '@/layout/DefaultLayout'
 import { IoIosArrowForward } from 'react-icons/io'
 import { BsGraphUpArrow } from 'react-icons/bs'
 import {
-  HomeContainer,
+  HomePageContainer,
   HomeContent,
   PopularBooksList,
   RecentReviewsList,
@@ -13,7 +13,7 @@ import ReviewCard from './components/ReviewCard'
 export default function Home() {
   return (
     <DefaultLayout>
-      <HomeContainer>
+      <HomePageContainer>
         <h1>
           <BsGraphUpArrow /> Home
         </h1>
@@ -42,7 +42,7 @@ export default function Home() {
             </div>
           </PopularBooksList>
         </HomeContent>
-      </HomeContainer>
+      </HomePageContainer>
     </DefaultLayout>
   )
 }
