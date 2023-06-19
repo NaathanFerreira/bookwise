@@ -6,9 +6,8 @@ import {
   ReviewCardContainer,
   ReviewCardContent,
   ReviewCardHeader,
-  ReviewStarsRating,
 } from './styles'
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import StarsRating from '@/components/StarsRating'
 
 export default function ReviewCard() {
   return (
@@ -26,13 +25,7 @@ export default function ReviewCard() {
             <span>Hoje</span>
           </div>
         </label>
-        <ReviewStarsRating>
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiOutlineStar />
-        </ReviewStarsRating>
+        <StarsRating />
       </ReviewCardHeader>
       <ReviewCardContent>
         <Image

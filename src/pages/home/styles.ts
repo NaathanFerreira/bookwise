@@ -25,12 +25,49 @@ export const HomeContent = styled('div', {
   gap: '$10',
 })
 
+export const LastReadBookContainer = styled('div', {
+  maxWidth: '608px',
+
+  span: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    marginBottom: '$3',
+  },
+
+  h5: {
+    color: '$gray100',
+    fontSize: '$sm',
+    fontWeight: '$regular',
+    lineHeight: '$base',
+  },
+
+  a: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '$2',
+
+    textDecoration: 'none',
+    color: '$purple100',
+    fontWeight: 'bold',
+    fontSize: 'sm',
+    lineHeight: 'base',
+
+    svg: {
+      color: '$purple100',
+    },
+  },
+})
+
 export const RecentReviewsList = styled('section', {
   display: 'flex',
   flexDirection: 'column',
   gap: '$3',
 
   h5: {
+    marginTop: '$6',
+
     color: '$gray100',
     fontSize: '$sm',
     fontWeight: '$regular',
@@ -39,6 +76,7 @@ export const RecentReviewsList = styled('section', {
 })
 
 export const PopularBooksList = styled('section', {
+  maxWidth: '328px',
   display: 'flex',
   flexDirection: 'column',
   gap: '$3',
@@ -70,11 +108,5 @@ export const PopularBooksList = styled('section', {
     svg: {
       color: '$purple100',
     },
-  },
-
-  div: {
-    width: '100%',
-    background: '$gray700',
-    height: '130px',
   },
 })

@@ -6,9 +6,12 @@ import {
   HomeContent,
   PopularBooksList,
   RecentReviewsList,
+  LastReadBookContainer,
 } from './styles'
 import Link from 'next/link'
 import ReviewCard from './components/ReviewCard'
+import BookCard from './components/BookCard'
+import LastReadCard from './components/LastReadCard'
 
 export default function Home() {
   return (
@@ -18,28 +21,34 @@ export default function Home() {
           <BsGraphUpArrow /> Home
         </h1>
         <HomeContent>
-          <RecentReviewsList>
-            <h5>Most recent reviews</h5>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-          </RecentReviewsList>
+          <div>
+            <LastReadBookContainer>
+              <span>
+                <h5>Your last read</h5>
+                <Link href="/profile">
+                  View all <IoIosArrowForward />
+                </Link>
+              </span>
+              <LastReadCard />
+            </LastReadBookContainer>
+            <RecentReviewsList>
+              <h5>Most recent reviews</h5>
+              <ReviewCard />
+              <ReviewCard />
+              <ReviewCard />
+            </RecentReviewsList>
+          </div>
           <PopularBooksList>
             <span>
               <h5>Popular books</h5>
-              <Link href="/">
-                Ver todos <IoIosArrowForward />
+              <Link href="/explore">
+                View all <IoIosArrowForward />
               </Link>
             </span>
-            <div>
-              <p>Book 4</p>
-            </div>
-            <div>
-              <p>Book 4</p>
-            </div>
-            <div>
-              <p>Book 4</p>
-            </div>
+            <BookCard />
+            <BookCard />
+            <BookCard />
+            <BookCard />
           </PopularBooksList>
         </HomeContent>
       </HomePageContainer>
