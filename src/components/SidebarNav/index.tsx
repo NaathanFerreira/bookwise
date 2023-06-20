@@ -47,7 +47,10 @@ export default function SidebarNav() {
           <BsBinoculars /> Explore
         </NavigationLink>
         {isUserSignedIn && (
-          <NavigationLink href="/profile" active={pathname === '/profile'}>
+          <NavigationLink
+            href={`/profile/${session.data.userId}`}
+            active={pathname.startsWith('/profile')}
+          >
             <BsPerson /> Profile
           </NavigationLink>
         )}
