@@ -12,8 +12,14 @@ import Link from 'next/link'
 import ReviewCard from './components/ReviewCard'
 import BookCard from './components/BookCard'
 import LastReadCard from './components/LastReadCard'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
+  const session = useSession()
+
+  const isUserLoggedIn = session.status === 'authenticated'
+  const userId = session.data?.userId
+
   return (
     <DefaultLayout>
       <HomePageContainer>
@@ -22,15 +28,17 @@ export default function Home() {
         </h1>
         <HomeContent>
           <div>
-            <LastReadBookContainer>
-              <span>
-                <h5>Your last read</h5>
-                <Link href="/profile">
-                  View all <IoIosArrowForward />
-                </Link>
-              </span>
-              <LastReadCard />
-            </LastReadBookContainer>
+            {isUserLoggedIn && (
+              <LastReadBookContainer>
+                <span>
+                  <h5>Your last read</h5>
+                  <Link href={`/profile/${userId}`}>
+                    View all <IoIosArrowForward />
+                  </Link>
+                </span>
+                <LastReadCard />
+              </LastReadBookContainer>
+            )}
             <RecentReviewsList>
               <h5>Most recent reviews</h5>
               <ReviewCard />

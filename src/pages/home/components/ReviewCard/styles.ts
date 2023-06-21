@@ -32,11 +32,6 @@ export const ReviewCardHeader = styled('div', {
     background: '$gradient-vertical',
   },
 
-  'div:first-child': {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-
   h1: {
     color: '$gray100',
     fontWeight: '$regular',

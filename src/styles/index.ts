@@ -75,4 +75,8 @@ export const { styled, getCssText } = createStitches({
       full: '99999px',
     },
   },
+  media: {
+    bp2: '(max-width: 1270px)',
+    bp3: '(max-width: 1520px)',
+  },
 })
