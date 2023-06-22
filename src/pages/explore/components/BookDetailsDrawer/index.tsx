@@ -1,7 +1,9 @@
+import { Fragment, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import {
   About,
   AboutItem,
+  ActionsButtonContainer,
   Book,
   BookDetail,
   BookDetailsDrawerContainer,
@@ -9,19 +11,47 @@ import {
   BookInfo,
   BookReviews,
   BookReviewsTitle,
+  CancelReviewButton,
   DrawerCloseButton,
   Overlay,
   Rating,
+  SubmitReviewButton,
+  User,
+  WriteReviewActions,
+  WriteReviewContainer,
+  WriteReviewHeader,
+  WriteReviewTextArea,
 } from './styles'
 import BookImageExample from '../../../../assets/book-example3.png'
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import Image from 'next/image'
 import StarsRating from '@/components/StarsRating'
 import { BsBookmark } from 'react-icons/bs'
 import { FiBookOpen } from 'react-icons/fi'
 import BookReviewCard from '../BookReviewCard'
+import { useSession } from 'next-auth/react'
+import LoginModal from '@/components/LoginModal'
 
 export default function BookDetailsDrawer() {
+  const [isUserWritingReview, setIsUserWritingReview] = useState(false)
+
+  const session = useSession()
+  const isUserSignedIn = session.status === 'authenticated'
+
+  const RatingWrapper = isUserSignedIn ? Fragment : LoginModal
+
+  const userCanRate = !isUserWritingReview
+
+  function handleRateBook() {
+    if (!isUserSignedIn) return
+
+    setIsUserWritingReview(true)
+  }
+
+  function handleSubmitReview() {
+    // todo
+  }
+
   return (
     <Dialog.Portal>
       <Overlay />
@@ -70,8 +100,41 @@ export default function BookDetailsDrawer() {
           <BookReviews>
             <BookReviewsTitle>
               <span>Reviews</span>
-              <button>Rate</button>
+              {userCanRate && (
+                <RatingWrapper>
+                  <button onClick={handleRateBook}>Rate</button>
+                </RatingWrapper>
+              )}
             </BookReviewsTitle>
+            {isUserWritingReview && (
+              <WriteReviewContainer>
+                <WriteReviewHeader>
+                  <User>
+                    <Image
+                      src="https://avatars.githubusercontent.com/u/35970600?v=4"
+                      alt=" Profile avatar image "
+                      width={40}
+                      height={40}
+                    />
+                    <h1>Nathan Ferreira</h1>
+                  </User>
+                  <StarsRating />
+                </WriteReviewHeader>
+                <WriteReviewTextArea placeholder="Write your review" />
+                <WriteReviewActions>
+                  <ActionsButtonContainer>
+                    <CancelReviewButton
+                      onClick={() => setIsUserWritingReview(false)}
+                    >
+                      <AiOutlineClose />
+                    </CancelReviewButton>
+                    <SubmitReviewButton onClick={handleSubmitReview}>
+                      <AiOutlineCheck />
+                    </SubmitReviewButton>
+                  </ActionsButtonContainer>
+                </WriteReviewActions>
+              </WriteReviewContainer>
+            )}
             <BookReviewCard />
             <BookReviewCard />
             <BookReviewCard />
