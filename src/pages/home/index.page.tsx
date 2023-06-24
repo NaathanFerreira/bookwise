@@ -9,16 +9,40 @@ import {
   LastReadBookContainer,
 } from './styles'
 import Link from 'next/link'
+import { useQuery } from 'react-query'
 import ReviewCard from './components/ReviewCard'
 import BookCard from './components/BookCard'
 import LastReadCard from './components/LastReadCard'
 import { useSession } from 'next-auth/react'
+import { api } from '@/lib/axios'
+import { Prisma } from '@prisma/client'
+
+type RatingWithBookAndUser = Prisma.RatingGetPayload<{
+  include: {
+    book: true
+    user: true
+  }
+}>
+
+interface RatingsApiResponse {
+  ratings: RatingWithBookAndUser[]
+}
 
 export default function Home() {
   const session = useSession()
 
+  const { data: ratings } = useQuery<RatingWithBookAndUser[]>(
+    ['ratings'],
+    async () => {
+      const response = await api.get<RatingsApiResponse>('/ratings')
+      return response.data.ratings
+    },
+  )
+
   const isUserLoggedIn = session.status === 'authenticated'
   const userId = session.data?.userId
+
+  if (!ratings) return
 
   return (
     <DefaultLayout>
@@ -41,9 +65,21 @@ export default function Home() {
             )}
             <RecentReviewsList>
               <h5>Most recent reviews</h5>
-              <ReviewCard />
-              <ReviewCard />
-              <ReviewCard />
+              {ratings.map((rating) => {
+                return (
+                  <ReviewCard
+                    key={rating.id}
+                    userName={rating.user.name}
+                    userAvatarUrl={rating.user.avatar_url}
+                    rate={rating.rate}
+                    createdAt={rating.created_at}
+                    bookAuthorName={rating.book.author}
+                    bookName={rating.book.name}
+                    bookDescription={rating.book.summary}
+                    bookCoverImageUrl={rating.book.cover_url}
+                  />
+                )
+              })}
             </RecentReviewsList>
           </div>
           <PopularBooksList>

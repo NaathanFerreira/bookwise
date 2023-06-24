@@ -1,14 +1,22 @@
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import { Rating, StickerStar } from '@smastrom/react-rating'
 import { StarsRatingContainer } from './styles'
 
-export default function StarsRating() {
+const myStyles = {
+  itemShapes: StickerStar,
+  itemStrokeWidth: 2,
+  activeFillColor: '#8381D9',
+  activeStrokeColor: '#8381D9',
+  inactiveStrokeColor: '#8381D9',
+}
+
+interface StarsRatingProps {
+  rate: number
+}
+
+export default function StarsRating({ rate }: StarsRatingProps) {
   return (
     <StarsRatingContainer>
-      <AiFillStar />
-      <AiFillStar />
-      <AiFillStar />
-      <AiFillStar />
-      <AiOutlineStar />
+      <Rating value={rate} readOnly itemStyles={myStyles} />
     </StarsRatingContainer>
   )
 }

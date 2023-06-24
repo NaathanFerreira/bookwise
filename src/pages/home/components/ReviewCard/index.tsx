@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import BookImageExample from '../../../../assets/book-example.png'
 import {
   BookInformations,
   BookTitle,
@@ -8,43 +7,63 @@ import {
   ReviewCardHeader,
 } from './styles'
 import StarsRating from '@/components/StarsRating'
+import { formatDistanceDate } from '@/utils/format-distance-date'
 
-export default function ReviewCard() {
+interface ReviewCardProps {
+  userName: string
+  userAvatarUrl: string | null
+  createdAt: Date
+  rate: number
+  bookCoverImageUrl: string
+  bookName: string
+  bookAuthorName: string
+  bookDescription: string
+}
+
+export default function ReviewCard(props: ReviewCardProps) {
+  const {
+    userName,
+    userAvatarUrl,
+    createdAt,
+    rate,
+    bookCoverImageUrl,
+    bookName,
+    bookAuthorName,
+    bookDescription,
+  } = props
+
+  console.log(bookCoverImageUrl)
+
   return (
     <ReviewCardContainer>
       <ReviewCardHeader>
         <label>
           <Image
-            src="https://avatars.githubusercontent.com/u/35970600?v=4"
+            src={userAvatarUrl ?? ''}
             alt=" Review owner avatar image "
             width={40}
             height={40}
           />
           <div>
-            <h1>Nathan Ferreira</h1>
-            <span>Hoje</span>
+            <h1>{userName}</h1>
+            <span>{formatDistanceDate(createdAt.toString())}</span>
           </div>
         </label>
-        <StarsRating />
+        <StarsRating rate={rate} />
       </ReviewCardHeader>
       <ReviewCardContent>
         <Image
-          src={BookImageExample.src}
+          src={bookCoverImageUrl}
           alt=" Book cover image "
           width={108}
           height={152}
         />
         <BookInformations>
           <BookTitle>
-            <h1>O Hobbit</h1>
-            <span>J.R.R. Tolkien</span>
+            <h1>{bookName}</h1>
+            <span>{bookAuthorName}</span>
           </BookTitle>
-          <p>
-            Semper et sapien proin vitae nisi. Feugiat neque integer donec et
-            aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo
-            a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed
-            vulputate massa velit nibha
-          </p>
+          <p>{bookDescription}</p>
         </BookInformations>
       </ReviewCardContent>
     </ReviewCardContainer>
