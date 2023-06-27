@@ -18,6 +18,8 @@ export default function SidebarNav() {
 
   const session = useSession()
 
+  console.log(session)
+
   const isUserSignedIn = session.status === 'authenticated'
   const user = session.data?.user!
 
@@ -48,7 +50,7 @@ export default function SidebarNav() {
         </NavigationLink>
         {isUserSignedIn && (
           <NavigationLink
-            href={`/profile/${session.data.userId}`}
+            href={`/profile/${session.data.user.id}`}
             active={pathname.startsWith('/profile')}
           >
             <BsPerson /> Profile
@@ -58,7 +60,7 @@ export default function SidebarNav() {
       {isUserSignedIn ? (
         <LogoutButton onClick={handleLogout}>
           <Image
-            src={user.image!}
+            src={user.avatar_url}
             width={32}
             height={32}
             alt="User profile avatar"

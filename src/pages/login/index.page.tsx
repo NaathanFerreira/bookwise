@@ -16,7 +16,7 @@ import { signIn, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth].api'
+import { buildNextAuthOptions } from '../api/auth/[...nextauth].api'
 
 export default function Login() {
   const router = useRouter()
@@ -73,7 +73,11 @@ export default function Login() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(
+    req,
+    res,
+    buildNextAuthOptions(req, res),
+  )
 
   if (session) {
     return {
