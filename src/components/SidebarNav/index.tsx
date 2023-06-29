@@ -18,8 +18,6 @@ export default function SidebarNav() {
 
   const session = useSession()
 
-  console.log(session)
-
   const isUserSignedIn = session.status === 'authenticated'
   const user = session.data?.user!
 

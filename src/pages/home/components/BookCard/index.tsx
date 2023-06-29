@@ -1,23 +1,34 @@
 import { BookCardContainer, BookCardContent } from './styles'
-import BookImageExample from '../../../../assets/book-example2.png'
 import Image from 'next/image'
 import StarsRating from '@/components/StarsRating'
 
-export default function BookCard() {
+interface BookCardProps {
+  coverImageUrl: string
+  title: string
+  author: string
+  rate: number
+}
+
+export default function BookCard({
+  coverImageUrl,
+  title,
+  author,
+  rate,
+}: BookCardProps) {
   return (
     <BookCardContainer>
       <Image
-        src={BookImageExample.src}
+        src={coverImageUrl}
         width={64}
         height={94}
         alt=" Book cover image "
       />
       <BookCardContent>
         <label>
-          <h1>A revolução dos bichos</h1>
-          <span>George Orwell</span>
+          <h1>{title}</h1>
+          <span>{author}</span>
         </label>
-        <StarsRating />
+        <StarsRating rate={rate} />
       </BookCardContent>
     </BookCardContainer>
   )

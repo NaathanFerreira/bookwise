@@ -22,7 +22,7 @@ export default function RatedBookCard() {
             <h1>Entendendo Algoritmos</h1>
             <span>Adityia Bhargava</span>
           </label>
-          <StarsRating />
+          <StarsRating rate={1} />
         </RatedBookCardInfos>
       </RatedBookCardHeader>
       <p>

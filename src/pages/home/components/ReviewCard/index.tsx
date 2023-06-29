@@ -32,8 +32,6 @@ export default function ReviewCard(props: ReviewCardProps) {
     bookDescription,
   } = props
 
-  console.log(bookCoverImageUrl)
-
   return (
     <ReviewCardContainer>
       <ReviewCardHeader>

@@ -75,7 +75,7 @@ export default function BookDetailsDrawer() {
                   <span>Zeno Rocha</span>
                 </label>
                 <Rating>
-                  <StarsRating />
+                  <StarsRating rate={3} />
                   <span>2 reviews</span>
                 </Rating>
               </BookInfo>
@@ -118,7 +118,7 @@ export default function BookDetailsDrawer() {
                     />
                     <h1>Nathan Ferreira</h1>
                   </User>
-                  <StarsRating />
+                  <StarsRating rate={3} />
                 </WriteReviewHeader>
                 <WriteReviewTextArea placeholder="Write your review" />
                 <WriteReviewActions>

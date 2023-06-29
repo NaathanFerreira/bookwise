@@ -24,8 +24,23 @@ type RatingWithBookAndUser = Prisma.RatingGetPayload<{
   }
 }>
 
+type BooksWithAvgRating = {
+  avgRating: number
+  id: string
+  created_at: Date
+  name: string
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+}
+
 interface RatingsApiResponse {
   ratings: RatingWithBookAndUser[]
+}
+
+interface MostPopularBooksApiResponse {
+  mostPopularBooks: BooksWithAvgRating[]
 }
 
 export default function Home() {
@@ -39,10 +54,18 @@ export default function Home() {
     },
   )
 
-  const isUserLoggedIn = session.status === 'authenticated'
-  const userId = session.data?.userId
+  const { data: mostPopularBooks } = useQuery<BooksWithAvgRating[]>(
+    ['mostPopularBooks'],
+    async () => {
+      const response = await api.get<MostPopularBooksApiResponse>(
+        '/books/most-popular',
+      )
+      return response.data.mostPopularBooks
+    },
+  )
 
-  if (!ratings) return
+  const isUserLoggedIn = session.status === 'authenticated'
+  const userId = session.data?.user.id
 
   return (
     <DefaultLayout>
@@ -65,7 +88,7 @@ export default function Home() {
             )}
             <RecentReviewsList>
               <h5>Most recent reviews</h5>
-              {ratings.map((rating) => {
+              {ratings?.map((rating) => {
                 return (
                   <ReviewCard
                     key={rating.id}
@@ -89,10 +112,17 @@ export default function Home() {
                 View all <IoIosArrowForward />
               </Link>
             </span>
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
+            {mostPopularBooks?.map((book) => {
+              return (
+                <BookCard
+                  key={book.id}
+                  coverImageUrl={book.cover_url}
+                  title={book.name}
+                  author={book.author}
+                  rate={book.avgRating}
+                />
+              )
+            })}
           </PopularBooksList>
         </HomeContent>
       </HomePageContainer>

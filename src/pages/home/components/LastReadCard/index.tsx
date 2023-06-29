@@ -19,7 +19,7 @@ export default function LastReadCard() {
       <div>
         <LastReadCardHeader>
           <span>2 days ago</span>
-          <StarsRating />
+          <StarsRating rate={2} />
         </LastReadCardHeader>
         <LastReadCardContent>
           <label>

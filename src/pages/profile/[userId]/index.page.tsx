@@ -27,7 +27,7 @@ interface ProfileProps {
 
 export default function Profile({ userId }: ProfileProps) {
   const session = useSession()
-  const isLoggedUserProfilePage = userId === session.data?.userId
+  const isLoggedUserProfilePage = userId === session.data?.user.id
 
   return (
     <DefaultLayout>

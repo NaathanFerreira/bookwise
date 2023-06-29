@@ -19,7 +19,7 @@ export default function BookReviewCard() {
             <span>2 days ago</span>
           </label>
         </User>
-        <StarsRating />
+        <StarsRating rate={3} />
       </BookReviewCardHeader>
       <p>
         Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.

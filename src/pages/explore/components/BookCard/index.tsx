@@ -22,7 +22,7 @@ export default function BookCard() {
               <h1>A revolução dos bichos</h1>
               <span>George Orwell</span>
             </label>
-            <StarsRating />
+            <StarsRating rate={2} />
           </BookCardContent>
         </BookCardContainer>
       </Dialog.Trigger>

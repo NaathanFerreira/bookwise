@@ -5,6 +5,9 @@ export const BookCardContainer = styled('div', {
   height: '126px',
   borderRadius: '8px',
 
+  overflow: 'hidden',
+  position: 'relative',
+
   background: '$gray700',
 
   padding: '$4 $5',
@@ -23,6 +26,12 @@ export const BookCardContent = styled('div', {
     fontWeight: '$regular',
     lineHeight: '$base',
     fontSize: '$md',
+
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical',
   },
 
   span: {
