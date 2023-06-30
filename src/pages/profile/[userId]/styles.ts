@@ -125,6 +125,12 @@ export const ProfileInfosHeader = styled('div', {
     background: '$gradient-vertical',
   },
 
+  label: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
   h1: {
     color: '$gray100',
     fontWeight: '$regular',

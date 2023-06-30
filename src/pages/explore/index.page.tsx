@@ -38,6 +38,7 @@ interface BooksCategoriesApiResponse {
 
 export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [searchBook, setSearchBook] = useState('')
 
   const { data: books } = useQuery<BooksWithAvgRating[]>(
     ['books', selectedCategory],
@@ -65,6 +66,13 @@ export default function Explore() {
     setSelectedCategory(categoryId)
   }
 
+  const filteredBooks = books?.filter((book) => {
+    return (
+      book.name.toLowerCase().includes(searchBook.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchBook.toLowerCase())
+    )
+  })
+
   return (
     <DefaultLayout>
       <ExplorePageContainer>
@@ -73,7 +81,12 @@ export default function Explore() {
             <BsBinoculars /> Explore
           </h1>
           <SearchInputContainer>
-            <input type="text" placeholder="Search rated book" />
+            <input
+              type="text"
+              placeholder="Search rated book"
+              value={searchBook}
+              onChange={({ target }) => setSearchBook(target.value)}
+            />
             <HiMagnifyingGlass />
           </SearchInputContainer>
         </ExplorePageHeader>
@@ -97,7 +110,7 @@ export default function Explore() {
           })}
         </FilterOptions>
         <BookList>
-          {books?.map((book) => {
+          {filteredBooks?.map((book) => {
             return (
               <BookCard
                 key={book.id}
