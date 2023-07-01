@@ -109,6 +109,10 @@ export const BookList = styled('div', {
   gridTemplateColumns: '1fr 1fr 1fr 1fr',
   gap: '$4',
 
+  a: {
+    textDecoration: 'none',
+  },
+
   '@bp3': {
     gridTemplateColumns: '1fr 1fr 1fr',
   },

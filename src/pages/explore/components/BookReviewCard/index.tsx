@@ -1,31 +1,42 @@
 import StarsRating from '@/components/StarsRating'
 import { BookReviewCardContainer, BookReviewCardHeader, User } from './styles'
 import Image from 'next/image'
+import { formatDistanceDate } from '@/utils/format-distance-date'
 
-export default function BookReviewCard() {
+interface BookReviewCardProps {
+  userImageUrl: string
+  userName: string
+  createdAt: Date
+  rate: number
+  comment: string
+}
+
+export default function BookReviewCard({
+  userImageUrl,
+  userName,
+  createdAt,
+  rate,
+  comment,
+}: BookReviewCardProps) {
   return (
     <BookReviewCardContainer>
       <BookReviewCardHeader>
         <User>
           <Image
-            src="https://avatars.githubusercontent.com/u/35970600?v=4"
+            src={userImageUrl}
             alt=" Profile avatar image "
             width={40}
             height={40}
           />
 
           <label>
-            <h1>Brandon Botosh</h1>
-            <span>2 days ago</span>
+            <h1>{userName}</h1>
+            <span>{formatDistanceDate(createdAt.toString())}</span>
           </label>
         </User>
-        <StarsRating rate={3} />
+        <StarsRating rate={rate} />
       </BookReviewCardHeader>
-      <p>
-        Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-        Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta
-        eget nec vitae sit vulputate eget
-      </p>
+      <p>{comment}</p>
     </BookReviewCardContainer>
   )
 }

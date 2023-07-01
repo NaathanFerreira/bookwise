@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { useRouter } from 'next/router'
 import * as Dialog from '@radix-ui/react-dialog'
 import {
   About,
@@ -22,7 +23,13 @@ import {
   WriteReviewHeader,
   WriteReviewTextArea,
 } from './styles'
-import BookImageExample from '../../../../assets/book-example3.png'
+import {
+  Book as PrismaBook,
+  CategoriesOnBooks,
+  Category,
+  Rating as PrismaRating,
+  User as PrismaUser,
+} from '@prisma/client'
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import Image from 'next/image'
 import StarsRating from '@/components/StarsRating'
@@ -31,9 +38,43 @@ import { FiBookOpen } from 'react-icons/fi'
 import BookReviewCard from '../BookReviewCard'
 import { useSession } from 'next-auth/react'
 import LoginModal from '@/components/LoginModal'
+import { useQuery } from 'react-query'
+import { api } from '@/lib/axios'
+
+type BookWithAvgRating = PrismaBook & {
+  avgRating: number
+  alreadyRead: boolean
+}
+type RatingWithAuthor = PrismaRating & {
+  user: PrismaUser
+}
+
+type BookDetails = BookWithAvgRating & {
+  ratings: RatingWithAuthor[]
+  categories: (CategoriesOnBooks & {
+    category: Category
+  })[]
+}
+
+interface BookDetailsApiResponse {
+  book: BookDetails
+}
 
 export default function BookDetailsDrawer() {
   const [isUserWritingReview, setIsUserWritingReview] = useState(false)
+
+  const router = useRouter()
+  const bookId = router.query.bookId
+
+  const { data: book } = useQuery<BookDetails>(
+    ['bookDetails', bookId],
+    async () => {
+      const response = await api.get<BookDetailsApiResponse>(
+        `/books/details/${bookId}`,
+      )
+      return response.data.book
+    },
+  )
 
   const session = useSession()
   const isUserSignedIn = session.status === 'authenticated'
@@ -64,19 +105,19 @@ export default function BookDetailsDrawer() {
             <Book>
               <Image
                 quality={100}
-                src={BookImageExample.src}
+                src={book?.cover_url ?? ''}
                 width={172}
                 height={242}
                 alt=" Book cover image "
               />
               <BookInfo>
                 <label>
-                  <h1>Algoritmos</h1>
-                  <span>Zeno Rocha</span>
+                  <h1>{book?.name}</h1>
+                  <span>{book?.author}</span>
                 </label>
                 <Rating>
-                  <StarsRating rate={3} />
-                  <span>2 reviews</span>
+                  <StarsRating rate={book?.avgRating ?? 0} />
+                  <span>{book?.ratings.length} reviews</span>
                 </Rating>
               </BookInfo>
             </Book>
@@ -85,14 +126,18 @@ export default function BookDetailsDrawer() {
                 <BsBookmark />
                 <div>
                   <span>Category</span>
-                  <h5>Tech, education</h5>
+                  <h5>
+                    {book?.categories
+                      .map(({ category }) => category.name)
+                      .join(', ')}
+                  </h5>
                 </div>
               </AboutItem>
               <AboutItem>
                 <FiBookOpen />
                 <div>
                   <span>Pages</span>
-                  <h5>160</h5>
+                  <h5>{book?.total_pages}</h5>
                 </div>
               </AboutItem>
             </About>
@@ -135,10 +180,18 @@ export default function BookDetailsDrawer() {
                 </WriteReviewActions>
               </WriteReviewContainer>
             )}
-            <BookReviewCard />
-            <BookReviewCard />
-            <BookReviewCard />
-            <BookReviewCard />
+            {book?.ratings.map((rating) => {
+              return (
+                <BookReviewCard
+                  key={rating.id}
+                  userImageUrl={rating.user.avatar_url ?? ''}
+                  userName={rating.user.name}
+                  createdAt={rating.created_at}
+                  rate={rating.rate}
+                  comment={rating.description}
+                />
+              )
+            })}
           </BookReviews>
         </BookDetailsDrawerContent>
       </BookDetailsDrawerContainer>

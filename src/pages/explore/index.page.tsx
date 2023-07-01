@@ -1,4 +1,6 @@
 import DefaultLayout from '@/layout/DefaultLayout'
+import Link from 'next/link'
+import * as Dialog from '@radix-ui/react-dialog'
 import { BsBinoculars } from 'react-icons/bs'
 import {
   BookList,
@@ -14,6 +16,7 @@ import { useQuery } from 'react-query'
 import { api } from '@/lib/axios'
 import { Category } from '@prisma/client'
 import { useState } from 'react'
+import BookDetailsDrawer from './components/BookDetailsDrawer'
 
 type BooksWithAvgRating = {
   ratings: number
@@ -110,17 +113,23 @@ export default function Explore() {
           })}
         </FilterOptions>
         <BookList>
-          {filteredBooks?.map((book) => {
-            return (
-              <BookCard
-                key={book.id}
-                coverImageUrl={book.cover_url}
-                title={book.name}
-                author={book.author}
-                rate={book.avgRating}
-              />
-            )
-          })}
+          <Dialog.Root>
+            {filteredBooks?.map((book) => {
+              return (
+                <Dialog.Trigger asChild key={book.id}>
+                  <Link href={`/explore?bookId=${book.id}`}>
+                    <BookCard
+                      coverImageUrl={book.cover_url}
+                      title={book.name}
+                      author={book.author}
+                      rate={book.avgRating}
+                    />
+                  </Link>
+                </Dialog.Trigger>
+              )
+            })}
+            <BookDetailsDrawer />
+          </Dialog.Root>
         </BookList>
       </ExplorePageContainer>
     </DefaultLayout>
