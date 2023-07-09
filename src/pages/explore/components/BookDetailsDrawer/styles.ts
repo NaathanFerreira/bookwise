@@ -84,7 +84,7 @@ export const BookInfo = styled('div', {
   },
 })
 
-export const Rating = styled('div', {
+export const RatingContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '$1',
@@ -167,7 +167,7 @@ export const BookReviewsTitle = styled('div', {
   },
 })
 
-export const WriteReviewContainer = styled('div', {
+export const WriteReviewContainer = styled('form', {
   padding: '$8',
 
   display: 'flex',
@@ -177,6 +177,10 @@ export const WriteReviewContainer = styled('div', {
 
   background: '$gray700',
   borderRadius: '8px',
+})
+
+export const ErrorMessage = styled('strong', {
+  color: '#f75a68',
 })
 
 export const User = styled('div', {

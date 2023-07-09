@@ -1,7 +1,7 @@
 import { Rating, StickerStar } from '@smastrom/react-rating'
 import { StarsRatingContainer } from './styles'
 
-const myStyles = {
+export const startsRatingStyles = {
   itemShapes: StickerStar,
   itemStrokeWidth: 2,
   activeFillColor: '#8381D9',
@@ -16,7 +16,7 @@ interface StarsRatingProps {
 export default function StarsRating({ rate }: StarsRatingProps) {
   return (
     <StarsRatingContainer>
-      <Rating value={rate} readOnly itemStyles={myStyles} />
+      <Rating value={rate} readOnly itemStyles={startsRatingStyles} />
     </StarsRatingContainer>
   )
 }
