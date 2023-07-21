@@ -17,6 +17,7 @@ import { api } from '@/lib/axios'
 import { Category } from '@prisma/client'
 import { useState } from 'react'
 import BookDetailsDrawer from './components/BookDetailsDrawer'
+import { useRouter } from 'next/router'
 
 type BooksWithAvgRating = {
   ratings: number
@@ -43,6 +44,9 @@ export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchBook, setSearchBook] = useState('')
 
+  const router = useRouter()
+  const bookId = router.query.bookId
+
   const { data: books } = useQuery<BooksWithAvgRating[]>(
     ['books', selectedCategory],
     async () => {
@@ -67,6 +71,12 @@ export default function Explore() {
 
   function handleChangeCategory(categoryId: string | null) {
     setSelectedCategory(categoryId)
+  }
+
+  function onOpenDetailsDrawerChange(open: boolean) {
+    if (!open) {
+      router.push('/explore', undefined, { shallow: true })
+    }
   }
 
   const filteredBooks = books?.filter((book) => {
@@ -113,7 +123,7 @@ export default function Explore() {
           })}
         </FilterOptions>
         <BookList>
-          <Dialog.Root>
+          <Dialog.Root open={!!bookId} onOpenChange={onOpenDetailsDrawerChange}>
             {filteredBooks?.map((book) => {
               return (
                 <Dialog.Trigger asChild key={book.id}>
