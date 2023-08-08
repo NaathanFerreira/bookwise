@@ -7,7 +7,8 @@ export const LoginPageContainer = styled('div', {
 })
 
 export const ImageContainer = styled('div', {
-  height: '100%',
+  // height: '100%',
+  maxHeight: '94vh',
   borderRadius: '$lg',
   overflow: 'hidden',
   position: 'relative',

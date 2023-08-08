@@ -13,6 +13,7 @@ export const LastReadCardContainer = styled('div', {
 })
 
 export const LastReadCardHeader = styled('div', {
+  width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
 
@@ -22,6 +23,11 @@ export const LastReadCardHeader = styled('div', {
     fontWeight: '$regular',
     lineHeight: '$base',
   },
+})
+
+export const ContentWrapper = styled('div', {
+  flex: 1,
+  width: '100%',
 })
 
 export const LastReadCardContent = styled('div', {

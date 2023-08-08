@@ -77,6 +77,7 @@ export const FilterOptions = styled('div', {
   display: 'flex',
   gap: '$4',
   alignItems: 'center',
+  flexWrap: 'wrap',
 })
 
 export const FilterItem = styled('button', {

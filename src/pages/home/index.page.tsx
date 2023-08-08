@@ -24,6 +24,12 @@ type RatingWithBookAndUser = Prisma.RatingGetPayload<{
   }
 }>
 
+type RatingWithBook = Prisma.RatingGetPayload<{
+  include: {
+    book: true
+  }
+}>
+
 type BooksWithAvgRating = {
   avgRating: number
   id: string
@@ -41,6 +47,10 @@ interface RatingsApiResponse {
 
 interface MostPopularBooksApiResponse {
   mostPopularBooks: BooksWithAvgRating[]
+}
+
+interface UserLatestRatingApiResponse {
+  rating: RatingWithBook
 }
 
 export default function Home() {
@@ -64,6 +74,18 @@ export default function Home() {
     },
   )
 
+  const { data: userLatestRating } = useQuery<RatingWithBook>(
+    'userLatestRating',
+    async () => {
+      const response = await api.get<UserLatestRatingApiResponse>(
+        '/ratings/user-latest',
+      )
+      return response.data.rating
+    },
+  )
+
+  console.log('userLatestRating', userLatestRating)
+
   const isUserLoggedIn = session.status === 'authenticated'
   const userId = session.data?.user.id
 
@@ -83,7 +105,16 @@ export default function Home() {
                     View all <IoIosArrowForward />
                   </Link>
                 </span>
-                <LastReadCard />
+                {userLatestRating && (
+                  <LastReadCard
+                    bookCoverImg={userLatestRating.book.cover_url}
+                    bookAuthor={userLatestRating.book.author}
+                    bookName={userLatestRating.book.name}
+                    comment={userLatestRating.description}
+                    rate={userLatestRating.rate}
+                    createdAt={userLatestRating.created_at.toString()}
+                  />
+                )}
               </LastReadBookContainer>
             )}
             <RecentReviewsList>
