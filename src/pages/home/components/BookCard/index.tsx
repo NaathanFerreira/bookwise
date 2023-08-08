@@ -1,34 +1,27 @@
 import { BookCardContainer, BookCardContent } from './styles'
 import Image from 'next/image'
 import StarsRating from '@/components/StarsRating'
+import { BookWithAvgRating } from '@/interfaces/books'
 
 interface BookCardProps {
-  coverImageUrl: string
-  title: string
-  author: string
-  rate: number
+  book: BookWithAvgRating
 }
 
-export default function BookCard({
-  coverImageUrl,
-  title,
-  author,
-  rate,
-}: BookCardProps) {
+export default function BookCard({ book }: BookCardProps) {
   return (
     <BookCardContainer>
       <Image
-        src={coverImageUrl}
+        src={book.cover_url}
         width={64}
         height={94}
         alt=" Book cover image "
       />
       <BookCardContent>
         <label>
-          <h1>{title}</h1>
-          <span>{author}</span>
+          <h1>{book.name}</h1>
+          <span>{book.author}</span>
         </label>
-        <StarsRating rate={rate} />
+        <StarsRating rate={book.avgRating} />
       </BookCardContent>
     </BookCardContainer>
   )

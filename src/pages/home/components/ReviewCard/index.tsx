@@ -8,60 +8,43 @@ import {
 } from './styles'
 import StarsRating from '@/components/StarsRating'
 import { formatDistanceDate } from '@/utils/format-distance-date'
+import { RatingWithBookAndUser } from '@/interfaces/ratings'
 
 interface ReviewCardProps {
-  userName: string
-  userAvatarUrl: string | null
-  createdAt: Date
-  rate: number
-  bookCoverImageUrl: string
-  bookName: string
-  bookAuthorName: string
-  bookDescription: string
+  rating: RatingWithBookAndUser
 }
 
-export default function ReviewCard(props: ReviewCardProps) {
-  const {
-    userName,
-    userAvatarUrl,
-    createdAt,
-    rate,
-    bookCoverImageUrl,
-    bookName,
-    bookAuthorName,
-    bookDescription,
-  } = props
-
+export default function ReviewCard({ rating }: ReviewCardProps) {
   return (
     <ReviewCardContainer>
       <ReviewCardHeader>
         <label>
           <Image
-            src={userAvatarUrl ?? ''}
+            src={rating.user.avatar_url!}
             alt=" Review owner avatar image "
             width={40}
             height={40}
           />
           <div>
-            <h1>{userName}</h1>
-            <span>{formatDistanceDate(createdAt.toString())}</span>
+            <h1>{rating.user.name}</h1>
+            <span>{formatDistanceDate(rating.created_at.toString())}</span>
           </div>
         </label>
-        <StarsRating rate={rate} />
+        <StarsRating rate={rating.rate} />
       </ReviewCardHeader>
       <ReviewCardContent>
         <Image
-          src={bookCoverImageUrl}
+          src={rating.book.cover_url}
           alt=" Book cover image "
           width={108}
           height={152}
         />
         <BookInformations>
           <BookTitle>
-            <h1>{bookName}</h1>
-            <span>{bookAuthorName}</span>
+            <h1>{rating.book.name}</h1>
+            <span>{rating.book.author}</span>
           </BookTitle>
-          <p>{bookDescription}</p>
+          <p>{rating.description}</p>
         </BookInformations>
       </ReviewCardContent>
     </ReviewCardContainer>
