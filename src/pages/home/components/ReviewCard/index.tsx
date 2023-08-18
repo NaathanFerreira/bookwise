@@ -6,6 +6,7 @@ import {
   ReviewCardContent,
   ReviewCardHeader,
 } from './styles'
+import Link from 'next/link'
 import StarsRating from '@/components/StarsRating'
 import { formatDistanceDate } from '@/utils/format-distance-date'
 import { RatingWithBookAndUser } from '@/interfaces/ratings'
@@ -18,7 +19,7 @@ export default function ReviewCard({ rating }: ReviewCardProps) {
   return (
     <ReviewCardContainer>
       <ReviewCardHeader>
-        <label>
+        <Link href={`/profile/${rating.user.id}`}>
           <Image
             src={rating.user.avatar_url!}
             alt=" Review owner avatar image "
@@ -29,10 +30,10 @@ export default function ReviewCard({ rating }: ReviewCardProps) {
             <h1>{rating.user.name}</h1>
             <span>{formatDistanceDate(rating.created_at.toString())}</span>
           </div>
-        </label>
+        </Link>
         <StarsRating rate={rating.rate} />
       </ReviewCardHeader>
-      <ReviewCardContent>
+      <ReviewCardContent href={`/explore?bookId=${rating.book.id}`}>
         <Image
           src={rating.book.cover_url}
           alt=" Book cover image "

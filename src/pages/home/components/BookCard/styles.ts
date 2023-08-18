@@ -1,6 +1,8 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
-export const BookCardContainer = styled('div', {
+export const BookCardContainer = styled(Link, {
+  textDecoration: 'none',
   width: '324px',
   height: '126px',
   borderRadius: '8px',

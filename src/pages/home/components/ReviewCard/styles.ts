@@ -1,4 +1,5 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
 export const ReviewCardContainer = styled('div', {
   width: '608px',
@@ -18,7 +19,8 @@ export const ReviewCardHeader = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
 
-  label: {
+  a: {
+    textDecoration: 'none',
     display: 'flex',
     gap: '$4',
 
@@ -47,7 +49,8 @@ export const ReviewCardHeader = styled('div', {
   },
 })
 
-export const ReviewCardContent = styled('div', {
+export const ReviewCardContent = styled(Link, {
+  textDecoration: 'none',
   display: 'flex',
   gap: '$4',
 })

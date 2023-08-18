@@ -1,6 +1,8 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
-export const LastReadCardContainer = styled('div', {
+export const LastReadCardContainer = styled(Link, {
+  textDecoration: 'none',
   width: '608px',
   height: '198px',
   background: '$gray600',

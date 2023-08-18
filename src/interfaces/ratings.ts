@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, Rating, User } from '@prisma/client'
 
 export type RatingWithBook = Prisma.RatingGetPayload<{
   include: {
@@ -12,6 +12,10 @@ export type RatingWithBookAndUser = Prisma.RatingGetPayload<{
     user: true
   }
 }>
+
+export type RatingWithAuthor = Rating & {
+  user: User
+}
 
 export interface UserLatestRatingApiResponse {
   rating: RatingWithBook

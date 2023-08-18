@@ -15,7 +15,7 @@ interface LastReadCardProps {
 
 export default function LastReadCard({ rating }: LastReadCardProps) {
   return (
-    <LastReadCardContainer>
+    <LastReadCardContainer href={`/explore?bookId=${rating.book.id}`}>
       <Image
         src={rating.book.cover_url}
         width={108}

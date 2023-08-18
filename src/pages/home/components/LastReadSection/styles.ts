@@ -1,6 +1,7 @@
 import { styled } from '@/styles'
 
 export const LastReadBookContainer = styled('div', {
+  textDecoration: 'none',
   maxWidth: '608px',
 
   span: {

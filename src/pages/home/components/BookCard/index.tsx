@@ -9,7 +9,7 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   return (
-    <BookCardContainer>
+    <BookCardContainer href={`/explore?bookId=${book.id}`}>
       <Image
         src={book.cover_url}
         width={64}
