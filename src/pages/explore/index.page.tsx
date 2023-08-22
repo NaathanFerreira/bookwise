@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { ExploreFilters } from './components/ExploreFilters'
 import { BookList } from './components/BookList'
 import { BooksApiReponse } from '@/interfaces/books'
+import { NextSeo } from 'next-seo'
 
 export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -38,6 +39,10 @@ export default function Explore() {
   })
 
   return (
+    <>
+    <NextSeo
+      title="BookWise - Explore"
+    />
     <DefaultLayout>
       <ExplorePageContainer>
         <ExplorePageHeader>
@@ -61,5 +66,6 @@ export default function Explore() {
         <BookList filteredBooks={filteredBooks ?? []} />
       </ExplorePageContainer>
     </DefaultLayout>
+    </>
   )
 }

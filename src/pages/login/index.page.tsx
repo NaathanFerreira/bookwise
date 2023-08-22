@@ -17,6 +17,7 @@ import { useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 import { buildNextAuthOptions } from '../api/auth/[...nextauth].api'
+import { NextSeo } from 'next-seo';
 
 export default function Login() {
   const router = useRouter()
@@ -35,6 +36,11 @@ export default function Login() {
   }, [isUserSignedIn, router])
 
   return (
+    <>
+    <NextSeo
+      title="BookWise - Login"
+      description="An application for rating and managing readings."
+    />
     <LoginPageContainer>
       <ImageContainer>
         <Image
@@ -69,6 +75,7 @@ export default function Login() {
         </LoginOptions>
       </LoginActionsContainer>
     </LoginPageContainer>
+    </>
   )
 }
 

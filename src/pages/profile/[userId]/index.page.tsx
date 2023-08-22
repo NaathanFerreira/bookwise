@@ -25,6 +25,7 @@ import { api } from '@/lib/axios'
 import { useQuery } from 'react-query'
 import { formatDistanceDate } from '@/utils/format-distance-date'
 import { useState } from 'react'
+import { NextSeo } from 'next-seo'
 
 export type ProfileRating = Rating & {
   book: Book & {
@@ -76,6 +77,10 @@ export default function Profile({ userId }: ProfileProps) {
       .includes(searchRating.toLocaleLowerCase())
   })
   return (
+    <>
+    <NextSeo
+      title="BookWise - Profile"
+    />
     <DefaultLayout>
       <ProfilePageContainer>
         {isLoggedUserProfilePage ? (
@@ -166,6 +171,7 @@ export default function Profile({ userId }: ProfileProps) {
         </ProfilePageContent>
       </ProfilePageContainer>
     </DefaultLayout>
+    </>
   )
 }
 
