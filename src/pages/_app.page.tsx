@@ -21,7 +21,7 @@ export default function App({
             openGraph={{
               type: 'website',
               locale: 'en_US',
-              url: 'https://www.nf-bookwise.vercel.app',
+              url: 'https://bookwise-zeta.vercel.app/',
               siteName: 'Bookwise',
             }}
           />
