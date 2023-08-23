@@ -1,10 +1,10 @@
 import { BookCardContainer, BookCardContent } from './styles'
 import Image from 'next/image'
 import StarsRating from '@/components/StarsRating'
-import { BooksWithAvgRating } from '@/interfaces/books'
+import { BookWithAvgRating } from '@/interfaces/books'
 
 interface BookCardProps {
-  book: BooksWithAvgRating
+  book: BookWithAvgRating
 }
 
 export default function BookCard({ book }: BookCardProps) {

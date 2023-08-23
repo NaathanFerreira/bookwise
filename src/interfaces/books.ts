@@ -14,7 +14,7 @@ export type BooksWithAvgRating = {
   created_at: Date
 }
 
-type BookWithAvgRating = Book & {
+export type BookWithAvgRating = Book & {
   avgRating: number
   alreadyRead: boolean
 }
