@@ -158,7 +158,7 @@ export const books = [
     author: 'Robert C. Martin',
     summary:
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-    cover_url: '/images/books/Arquitetura-limpa.png',
+    cover_url: '/images/books/arquitetura-limpa.png',
     total_pages: 288,
     categories: [
       {

@@ -64,13 +64,13 @@ export default function Login() {
           </WelcomeTextSection>
           <LoginOptions>
             <LoginButton onClick={() => handleSignIn('google')}>
-              <FcGoogle /> Entrar com Google
+              <FcGoogle /> Sign in with Google
             </LoginButton>
             <LoginButton onClick={() => handleSignIn('gihub')}>
-              <BsGithub /> Entrar com GitHub
+              <BsGithub /> Sign in with GitHub
             </LoginButton>
             <LoginButton onClick={() => router.push('/home')}>
-              <BsFillRocketTakeoffFill /> Entrar como visitante
+              <BsFillRocketTakeoffFill /> Browse as a Guest
             </LoginButton>
           </LoginOptions>
         </LoginActionsContainer>
