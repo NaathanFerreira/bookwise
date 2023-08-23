@@ -40,32 +40,30 @@ export default function Explore() {
 
   return (
     <>
-    <NextSeo
-      title="BookWise - Explore"
-    />
-    <DefaultLayout>
-      <ExplorePageContainer>
-        <ExplorePageHeader>
-          <h1>
-            <BsBinoculars /> Explore
-          </h1>
-          <SearchInputContainer>
-            <input
-              type="text"
-              placeholder="Search rated book"
-              value={searchBook}
-              onChange={({ target }) => setSearchBook(target.value)}
-            />
-            <HiMagnifyingGlass />
-          </SearchInputContainer>
-        </ExplorePageHeader>
-        <ExploreFilters
-          selectedCategory={selectedCategory}
-          handleChangeCategory={handleChangeCategory}
-        />
-        <BookList filteredBooks={filteredBooks ?? []} />
-      </ExplorePageContainer>
-    </DefaultLayout>
+      <NextSeo title="BookWise - Explore" />
+      <DefaultLayout>
+        <ExplorePageContainer>
+          <ExplorePageHeader>
+            <h1>
+              <BsBinoculars /> Explore
+            </h1>
+            <SearchInputContainer>
+              <input
+                type="text"
+                placeholder="Search rated book"
+                value={searchBook}
+                onChange={({ target }) => setSearchBook(target.value)}
+              />
+              <HiMagnifyingGlass />
+            </SearchInputContainer>
+          </ExplorePageHeader>
+          <ExploreFilters
+            selectedCategory={selectedCategory}
+            handleChangeCategory={handleChangeCategory}
+          />
+          <BookList filteredBooks={filteredBooks ?? []} />
+        </ExplorePageContainer>
+      </DefaultLayout>
     </>
   )
 }

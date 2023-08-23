@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 import { buildNextAuthOptions } from '../api/auth/[...nextauth].api'
-import { NextSeo } from 'next-seo';
+import { NextSeo } from 'next-seo'
 
 export default function Login() {
   const router = useRouter()
@@ -37,44 +37,44 @@ export default function Login() {
 
   return (
     <>
-    <NextSeo
-      title="BookWise - Login"
-      description="An application for rating and managing readings."
-    />
-    <LoginPageContainer>
-      <ImageContainer>
-        <Image
-          quality={100}
-          src={LoginBgImage}
-          priority
-          alt="A woman lying down reading a book "
-        />
-        <Image
-          id="wisebook-logo"
-          quality={100}
-          src={Logo}
-          priority
-          alt="WiseBook logo "
-        />
-      </ImageContainer>
-      <LoginActionsContainer>
-        <WelcomeTextSection>
-          <h1>Welcome!</h1>
-          <h5>Log in or access as a guest.</h5>
-        </WelcomeTextSection>
-        <LoginOptions>
-          <LoginButton onClick={() => handleSignIn('google')}>
-            <FcGoogle /> Entrar com Google
-          </LoginButton>
-          <LoginButton onClick={() => handleSignIn('gihub')}>
-            <BsGithub /> Entrar com GitHub
-          </LoginButton>
-          <LoginButton onClick={() => router.push('/home')}>
-            <BsFillRocketTakeoffFill /> Entrar como visitante
-          </LoginButton>
-        </LoginOptions>
-      </LoginActionsContainer>
-    </LoginPageContainer>
+      <NextSeo
+        title="BookWise - Login"
+        description="An application for rating and managing readings."
+      />
+      <LoginPageContainer>
+        <ImageContainer>
+          <Image
+            quality={100}
+            src={LoginBgImage}
+            priority
+            alt="A woman lying down reading a book "
+          />
+          <Image
+            id="wisebook-logo"
+            quality={100}
+            src={Logo}
+            priority
+            alt="WiseBook logo "
+          />
+        </ImageContainer>
+        <LoginActionsContainer>
+          <WelcomeTextSection>
+            <h1>Welcome!</h1>
+            <h5>Log in or access as a guest.</h5>
+          </WelcomeTextSection>
+          <LoginOptions>
+            <LoginButton onClick={() => handleSignIn('google')}>
+              <FcGoogle /> Entrar com Google
+            </LoginButton>
+            <LoginButton onClick={() => handleSignIn('gihub')}>
+              <BsGithub /> Entrar com GitHub
+            </LoginButton>
+            <LoginButton onClick={() => router.push('/home')}>
+              <BsFillRocketTakeoffFill /> Entrar como visitante
+            </LoginButton>
+          </LoginOptions>
+        </LoginActionsContainer>
+      </LoginPageContainer>
     </>
   )
 }

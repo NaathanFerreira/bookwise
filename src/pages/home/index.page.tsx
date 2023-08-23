@@ -9,23 +9,21 @@ import { NextSeo } from 'next-seo'
 export default function Home() {
   return (
     <>
-    <NextSeo
-      title="BookWise - Home"
-    />
-    <DefaultLayout>
-      <HomePageContainer>
-        <h1>
-          <BsGraphUpArrow /> Home
-        </h1>
-        <HomeContent>
-          <div>
-            <LastReadSection />
-            <LatestReviewsSection />
-          </div>
-          <PopularBooksSection />
-        </HomeContent>
-      </HomePageContainer>
-    </DefaultLayout>
+      <NextSeo title="BookWise - Home" />
+      <DefaultLayout>
+        <HomePageContainer>
+          <h1>
+            <BsGraphUpArrow /> Home
+          </h1>
+          <HomeContent>
+            <div>
+              <LastReadSection />
+              <LatestReviewsSection />
+            </div>
+            <PopularBooksSection />
+          </HomeContent>
+        </HomePageContainer>
+      </DefaultLayout>
     </>
   )
 }

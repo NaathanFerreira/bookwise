@@ -19,7 +19,7 @@ export default function SidebarNav() {
   const session = useSession()
 
   const isUserSignedIn = session.status === 'authenticated'
-  const user = session.data?.user!
+  const user = session.data?.user
 
   async function handleLogout() {
     await signOut()
@@ -58,12 +58,12 @@ export default function SidebarNav() {
       {isUserSignedIn ? (
         <LogoutButton onClick={handleLogout}>
           <Image
-            src={user.avatar_url}
+            src={user?.avatar_url ?? ''}
             width={32}
             height={32}
             alt="User profile avatar"
           />
-          {user.name}
+          {user?.name}
           <FiLogOut />
         </LogoutButton>
       ) : (

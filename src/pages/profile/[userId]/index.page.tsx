@@ -78,99 +78,97 @@ export default function Profile({ userId }: ProfileProps) {
   })
   return (
     <>
-    <NextSeo
-      title="BookWise - Profile"
-    />
-    <DefaultLayout>
-      <ProfilePageContainer>
-        {isLoggedUserProfilePage ? (
-          <h1>
-            <BsPerson /> Profile
-          </h1>
-        ) : (
-          <BackButton href="/home">
-            <IoIosArrowBack /> Back
-          </BackButton>
-        )}
+      <NextSeo title="BookWise - Profile" />
+      <DefaultLayout>
+        <ProfilePageContainer>
+          {isLoggedUserProfilePage ? (
+            <h1>
+              <BsPerson /> Profile
+            </h1>
+          ) : (
+            <BackButton href="/home">
+              <IoIosArrowBack /> Back
+            </BackButton>
+          )}
 
-        <ProfilePageContent>
-          <div>
-            <SearchInputContainer>
-              <input
-                type="text"
-                placeholder="Search rated book"
-                value={searchRating}
-                onChange={({ target }) => setSearchRating(target.value)}
-              />
-              <HiMagnifyingGlass />
-            </SearchInputContainer>
-            <RatedBooksList>
-              {filteredUserRatings?.map((rate) => {
-                return (
-                  <div key={rate.id}>
-                    <h5>{formatDistanceDate(rate.created_at.toString())}</h5>
-                    <RatedBookCard
-                      coverImageUrl={rate.book.cover_url}
-                      title={rate.book.name}
-                      author={rate.book.author}
-                      rate={rate.rate}
-                      comment={rate.description}
-                    />
-                  </div>
-                )
-              })}
-            </RatedBooksList>
-          </div>
-          <ProfileInfos>
-            <ProfileInfosHeader>
-              <Image
-                src={profile?.user.avatar_url ?? ''}
-                alt=" Profile avatar image "
-                width={72}
-                height={72}
-              />
-              <label>
-                <h1>{profile?.user.name}</h1>
-                <span>
-                  member since {profile?.user.member_since.split('-')[0]}
-                </span>
-              </label>
-            </ProfileInfosHeader>
-            <Divider />
-            <ProfileAnalytics>
-              <AnalyticItem>
-                <FiBookOpen />
+          <ProfilePageContent>
+            <div>
+              <SearchInputContainer>
+                <input
+                  type="text"
+                  placeholder="Search rated book"
+                  value={searchRating}
+                  onChange={({ target }) => setSearchRating(target.value)}
+                />
+                <HiMagnifyingGlass />
+              </SearchInputContainer>
+              <RatedBooksList>
+                {filteredUserRatings?.map((rate) => {
+                  return (
+                    <div key={rate.id}>
+                      <h5>{formatDistanceDate(rate.created_at.toString())}</h5>
+                      <RatedBookCard
+                        coverImageUrl={rate.book.cover_url}
+                        title={rate.book.name}
+                        author={rate.book.author}
+                        rate={rate.rate}
+                        comment={rate.description}
+                      />
+                    </div>
+                  )
+                })}
+              </RatedBooksList>
+            </div>
+            <ProfileInfos>
+              <ProfileInfosHeader>
+                <Image
+                  src={profile?.user.avatar_url ?? ''}
+                  alt=" Profile avatar image "
+                  width={72}
+                  height={72}
+                />
                 <label>
-                  <h1>{profile?.readPages}</h1>
-                  <span>Pages read</span>
+                  <h1>{profile?.user.name}</h1>
+                  <span>
+                    member since {profile?.user.member_since.split('-')[0]}
+                  </span>
                 </label>
-              </AnalyticItem>
-              <AnalyticItem>
-                <IoLibrary />
-                <label>
-                  <h1>{profile?.ratedBooks}</h1>
-                  <span>Rated books</span>
-                </label>
-              </AnalyticItem>
-              <AnalyticItem>
-                <BsPersonLinesFill />
-                <label>
-                  <h1>{profile?.readAuthors}</h1>
-                  <span>Authors read</span>
-                </label>
-              </AnalyticItem>
-              <AnalyticItem>
-                <BsBookmark />
-                <label>
-                  <h1>{profile?.mostReadCategory ?? 'None'}</h1>
-                  <span>most read category</span>
-                </label>
-              </AnalyticItem>
-            </ProfileAnalytics>
-          </ProfileInfos>
-        </ProfilePageContent>
-      </ProfilePageContainer>
-    </DefaultLayout>
+              </ProfileInfosHeader>
+              <Divider />
+              <ProfileAnalytics>
+                <AnalyticItem>
+                  <FiBookOpen />
+                  <label>
+                    <h1>{profile?.readPages}</h1>
+                    <span>Pages read</span>
+                  </label>
+                </AnalyticItem>
+                <AnalyticItem>
+                  <IoLibrary />
+                  <label>
+                    <h1>{profile?.ratedBooks}</h1>
+                    <span>Rated books</span>
+                  </label>
+                </AnalyticItem>
+                <AnalyticItem>
+                  <BsPersonLinesFill />
+                  <label>
+                    <h1>{profile?.readAuthors}</h1>
+                    <span>Authors read</span>
+                  </label>
+                </AnalyticItem>
+                <AnalyticItem>
+                  <BsBookmark />
+                  <label>
+                    <h1>{profile?.mostReadCategory ?? 'None'}</h1>
+                    <span>most read category</span>
+                  </label>
+                </AnalyticItem>
+              </ProfileAnalytics>
+            </ProfileInfos>
+          </ProfilePageContent>
+        </ProfilePageContainer>
+      </DefaultLayout>
     </>
   )
 }
