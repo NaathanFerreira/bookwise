@@ -2,7 +2,7 @@
 
 ## Demo 📸
 
-[BookWise Site]([https://ig-calendar.vercel.app/](https://bookwise-zeta.vercel.app/))
+[BookWise Site]([https://ig-calendar.vercel.app/](https://bookwise-zeta.vercel.app/)
 
 ---
 ## About the project
