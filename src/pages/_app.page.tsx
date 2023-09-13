@@ -5,6 +5,7 @@ import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
 import { QueryClientProvider } from 'react-query'
 import '@smastrom/react-rating/style.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { DefaultSeo } from 'next-seo'
 
 globalStyles()
