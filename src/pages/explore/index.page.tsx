@@ -18,14 +18,17 @@ export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchBook, setSearchBook] = useState('')
 
-  const { data: books } = useQuery(['books', selectedCategory], async () => {
-    const response = await api.get<BooksApiReponse>('/books', {
-      params: {
-        category: selectedCategory,
-      },
-    })
-    return response.data.books
-  })
+  const { data: books, isLoading } = useQuery(
+    ['books', selectedCategory],
+    async () => {
+      const response = await api.get<BooksApiReponse>('/books', {
+        params: {
+          category: selectedCategory,
+        },
+      })
+      return response.data.books
+    },
+  )
 
   function handleChangeCategory(categoryId: string | null) {
     setSelectedCategory(categoryId)
@@ -61,7 +64,10 @@ export default function Explore() {
             selectedCategory={selectedCategory}
             handleChangeCategory={handleChangeCategory}
           />
-          <BookList filteredBooks={filteredBooks ?? []} />
+          <BookList
+            filteredBooks={filteredBooks ?? []}
+            isFecthingBooks={isLoading}
+          />
         </ExplorePageContainer>
       </DefaultLayout>
     </>

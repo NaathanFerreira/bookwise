@@ -2,6 +2,7 @@ import { useQuery } from 'react-query'
 import { FilterItem, FilterOptions } from './styles'
 import { api } from '@/lib/axios'
 import { BooksCategoriesApiResponse } from '@/interfaces/books'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 interface ExploreFiltersProps {
   selectedCategory: string | null
@@ -12,12 +13,35 @@ export function ExploreFilters({
   selectedCategory,
   handleChangeCategory,
 }: ExploreFiltersProps) {
-  const { data: categories } = useQuery(['categories'], async () => {
+  const { data: categories, isLoading } = useQuery(['categories'], async () => {
     const response = await api.get<BooksCategoriesApiResponse>(
       '/books/categories',
     )
     return response.data.categories
   })
+
+  if (isLoading) {
+    return (
+      <SkeletonTheme
+        baseColor="#252D4A"
+        highlightColor="#303F73"
+        borderRadius="99999px"
+        duration={4}
+      >
+        <FilterOptions>
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+          <Skeleton width={120} height={43} />
+        </FilterOptions>
+      </SkeletonTheme>
+    )
+  }
 
   return (
     <>
